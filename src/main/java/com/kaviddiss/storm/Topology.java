@@ -3,6 +3,7 @@ package com.kaviddiss.storm;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
+import com.google.common.base.Preconditions;
 
 public class Topology {
 
@@ -12,9 +13,14 @@ public class Topology {
 		Config config = new Config();
 		config.setMessageTimeoutSecs(120);
 
+        Preconditions.checkArgument(args.length == 2);
+
         // Read twitter credentials from command line args:
 		String twitterUsername = args[0];
 		String twitterPassword = args[1];
+
+        Preconditions.checkArgument(!twitterUsername.equals(""));
+        Preconditions.checkArgument(!twitterPassword.equals(""));
 
 		TopologyBuilder b = new TopologyBuilder();
 		b.setSpout("TwitterSampleSpout", new TwitterSampleSpout(twitterUsername, twitterPassword));
