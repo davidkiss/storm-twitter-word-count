@@ -5,6 +5,11 @@ import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import com.google.common.base.Preconditions;
 
+/**
+ * Topology class that sets up the Storm topology for this sample.
+ * Please note that Twitter credentials have to be provided as VM args, otherwise you'll get an Unauthorized error.
+ * @link http://twitter4j.org/en/configuration.html#systempropertyconfiguration
+ */
 public class Topology {
 
 	static final String TOPOLOGY_NAME = "storm-twitter-word-count";
@@ -13,17 +18,8 @@ public class Topology {
 		Config config = new Config();
 		config.setMessageTimeoutSecs(120);
 
-        Preconditions.checkArgument(args.length == 2);
-
-        // Read twitter credentials from command line args:
-		String twitterUsername = args[0];
-		String twitterPassword = args[1];
-
-        Preconditions.checkArgument(!twitterUsername.equals(""));
-        Preconditions.checkArgument(!twitterPassword.equals(""));
-
 		TopologyBuilder b = new TopologyBuilder();
-		b.setSpout("TwitterSampleSpout", new TwitterSampleSpout(twitterUsername, twitterPassword));
+		b.setSpout("TwitterSampleSpout", new TwitterSampleSpout());
         b.setBolt("WordSplitterBolt", new WordSplitterBolt(5)).shuffleGrouping("TwitterSampleSpout");
         b.setBolt("IgnoreWordsBolt", new IgnoreWordsBolt()).shuffleGrouping("WordSplitterBolt");
         b.setBolt("WordCounterBolt", new WordCounterBolt(10, 5 * 60, 50)).shuffleGrouping("IgnoreWordsBolt");

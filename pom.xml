@@ -32,12 +32,12 @@
     <dependency>
       <groupId>org.twitter4j</groupId>
       <artifactId>twitter4j-core</artifactId>
-      <version>2.2.6</version>
+      <version>3.0.3</version>
     </dependency>
     <dependency>
       <groupId>org.twitter4j</groupId>
       <artifactId>twitter4j-stream</artifactId>
-      <version>2.2.6</version>
+      <version>3.0.3</version>
     </dependency>
     <dependency>
       <groupId>storm</groupId>
@@ -72,6 +72,14 @@
     <repository>
       <id>clojars.org</id>
       <url>http://clojars.org/repo</url>
+    </repository>
+    <repository>
+      <id>twitter4j.org</id>
+      <name>twitter4j.org Repository</name>
+      <url>http://twitter4j.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
     </repository>
   </repositories>
 

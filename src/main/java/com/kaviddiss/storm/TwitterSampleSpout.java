@@ -14,7 +14,6 @@ import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 import com.google.common.base.Preconditions;
 import twitter4j.*;
-import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -29,15 +28,6 @@ public class TwitterSampleSpout extends BaseRichSpout {
 	private SpoutOutputCollector collector;
     private LinkedBlockingQueue<Status> queue;
     private TwitterStream twitterStream;
-    private final String username;
-    private final String pwd;
-
-	public TwitterSampleSpout(String username, String pwd) {
-		Preconditions.checkArgument(!username.equals(""));
-		Preconditions.checkArgument(!pwd.equals(""));
-		this.username = username;
-		this.pwd = pwd;
-	}
 
 	@Override
 	public void open(Map conf, TopologyContext context,
@@ -63,14 +53,16 @@ public class TwitterSampleSpout extends BaseRichSpout {
 			public void onScrubGeo(long l, long l1) {
 			}
 
-			@Override
+            @Override
+            public void onStallWarning(StallWarning stallWarning) {
+            }
+
+            @Override
 			public void onException(Exception e) {
 			}
 		};
 
-		TwitterStreamFactory factory = new TwitterStreamFactory(
-				new ConfigurationBuilder().setUser(username).setPassword(pwd)
-						.build());
+        TwitterStreamFactory factory = new TwitterStreamFactory();
 		twitterStream = factory.getInstance();
 		twitterStream.addListener(listener);
 		twitterStream.sample();
