@@ -8,7 +8,7 @@
   <name>Storm Twitter Word Count sample</name>
   <url>http://kaviddiss.com</url>
 
-  <dependencies>       
+  <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -42,11 +42,13 @@
     <dependency>
       <groupId>storm</groupId>
       <artifactId>storm</artifactId>
-	    <version>0.8.1</version>
+      <version>0.8.1</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -65,6 +67,28 @@
 	  	  <classpathScope>compile</classpathScope>
 	    </configuration>
 	  </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass>com.kaviddiss.storm.Topology</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
