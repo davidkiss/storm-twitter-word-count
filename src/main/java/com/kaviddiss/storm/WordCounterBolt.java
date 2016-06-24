@@ -18,11 +18,17 @@ import java.util.TreeMap;
  * @author davidk
  */
 public class WordCounterBolt extends BaseRichBolt {
-    private static final Logger logger = LoggerFactory.getLogger(WordCounterBolt.class);
-    /** Number of seconds before the top list will be logged to stdout. */
+
+	private static final long serialVersionUID = 2706047697068872387L;
+	
+	private static final Logger logger = LoggerFactory.getLogger(WordCounterBolt.class);
+    
+	/** Number of seconds before the top list will be logged to stdout. */
     private final long logIntervalSec;
+    
     /** Number of seconds before the top list will be cleared. */
     private final long clearIntervalSec;
+    
     /** Number of top words to store in stats. */
     private final int topListSize;
 

@@ -15,7 +15,10 @@ import java.util.Map;
  * Receives tweets and emits its words over a certain length.
  */
 public class WordSplitterBolt extends BaseRichBolt {
-    private final int minWordLength;
+	
+	private static final long serialVersionUID = 5151173513759399636L;
+
+	private final int minWordLength;
 
     private OutputCollector collector;
 
