@@ -12,7 +12,6 @@ import backtype.storm.topology.base.BaseRichSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
-import com.google.common.base.Preconditions;
 import twitter4j.*;
 
 import java.util.Map;
@@ -20,18 +19,18 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Reads Twitter's sample feed using the twitter4j library.
+ * 
  * @author davidk
  */
 @SuppressWarnings({ "rawtypes", "serial" })
 public class TwitterSampleSpout extends BaseRichSpout {
 
 	private SpoutOutputCollector collector;
-    private LinkedBlockingQueue<Status> queue;
-    private TwitterStream twitterStream;
+	private LinkedBlockingQueue<Status> queue;
+	private TwitterStream twitterStream;
 
 	@Override
-	public void open(Map conf, TopologyContext context,
-			SpoutOutputCollector collector) {
+	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
 		queue = new LinkedBlockingQueue<Status>(1000);
 		this.collector = collector;
 
@@ -53,16 +52,16 @@ public class TwitterSampleSpout extends BaseRichSpout {
 			public void onScrubGeo(long l, long l1) {
 			}
 
-            @Override
-            public void onStallWarning(StallWarning stallWarning) {
-            }
+			@Override
+			public void onStallWarning(StallWarning stallWarning) {
+			}
 
-            @Override
+			@Override
 			public void onException(Exception e) {
 			}
 		};
 
-        TwitterStreamFactory factory = new TwitterStreamFactory();
+		TwitterStreamFactory factory = new TwitterStreamFactory();
 		twitterStream = factory.getInstance();
 		twitterStream.addListener(listener);
 		twitterStream.sample();
@@ -73,7 +72,7 @@ public class TwitterSampleSpout extends BaseRichSpout {
 		Status ret = queue.poll();
 		if (ret == null) {
 			Utils.sleep(50);
-        } else {
+		} else {
 			collector.emit(new Values(ret));
 		}
 	}

@@ -63,7 +63,7 @@
 	    <artifactId>exec-maven-plugin</artifactId>
 	    <version>1.2.1</version>
 	    <configuration>
-	      <mainClass>org.dvto.storm.Topology</mainClass>
+	      <mainClass>com.kaviddiss.storm.Topology</mainClass>
 	  	  <classpathScope>compile</classpathScope>
 	    </configuration>
 	  </plugin>

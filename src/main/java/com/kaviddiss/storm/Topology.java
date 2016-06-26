@@ -3,7 +3,6 @@ package com.kaviddiss.storm;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
-import com.google.common.base.Preconditions;
 
 /**
  * Topology class that sets up the Storm topology for this sample.
