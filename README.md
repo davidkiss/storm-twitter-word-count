@@ -16,3 +16,8 @@ To get started:
 
 You'll need to have valid Twitter OAuth credentials to get the sample working.
 For the exact steps on how to do that, visit https://dev.twitter.com/discussions/631.
+
+## Donation
+If you found this code helpful, I'd be grateful for your donation.
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2FKB7L5SWX5BA)
